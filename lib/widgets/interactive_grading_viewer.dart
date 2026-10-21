@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../models/onion_grade_plus_models.dart';
 import '../services/localization_service.dart';
+import '../services/platform_image.dart';
 
 class InteractiveGradingViewer extends StatefulWidget {
   final String? imagePath;
@@ -227,9 +227,12 @@ class _InteractiveGradingViewerState extends State<InteractiveGradingViewer> {
               fit: StackFit.expand,
               children: [
                 // Base Image / Onion specimen
-                (widget.imagePath != null && File(widget.imagePath!).existsSync())
-                    ? Image.file(File(widget.imagePath!), fit: BoxFit.cover)
-                    : const Center(child: Text("🧅", style: TextStyle(fontSize: 72))),
+                imageOrPlaceholder(
+                  widget.imagePath,
+                  placeholder: const Center(
+                    child: Text("🧅", style: TextStyle(fontSize: 72)),
+                  ),
+                ),
 
                 // Simulated Grad-CAM Heatmap Overlay
                 if (_showHeatmap)

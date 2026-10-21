@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_colors.dart';
 import '../providers/app_state_provider.dart';
 import '../services/localization_service.dart';
+import '../services/platform_image.dart';
 import '../widgets/audio_speak_button.dart';
 import 'scan_result_screen.dart';
 import 'scanner_screen.dart';
@@ -226,11 +226,12 @@ class _MyRecordsScreenState extends State<MyRecordsScreen> {
                                     width: 65,
                                     height: 65,
                                     color: AppColors.onionPurple.withValues(alpha: 0.08),
-                                    child: (item.imagePath != null && File(item.imagePath!).existsSync())
-                                        ? Image.file(File(item.imagePath!), fit: BoxFit.cover)
-                                        : const Center(
-                                            child: Text("🧅", style: TextStyle(fontSize: 32)),
-                                          ),
+                                    child: imageOrPlaceholder(
+                                      item.imagePath,
+                                      placeholder: const Center(
+                                        child: Text("🧅", style: TextStyle(fontSize: 32)),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 14),

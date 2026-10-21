@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
       );
 
       if (photo != null) {
-        _triggerQualityGateCheck(photo.path);
+        _triggerQualityGateCheck(
+          photo.path,
+          imageBytes: await photo.readAsBytes(),
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -40,7 +44,11 @@ class _ScannerScreenState extends State<ScannerScreen> {
     }
   }
 
-  void _triggerQualityGateCheck(String imagePath, {bool forceReject = false}) {
+  void _triggerQualityGateCheck(
+    String imagePath, {
+    Uint8List? imageBytes,
+    bool forceReject = false,
+  }) {
     showModalBottomSheet(
       context: context,
       isDismissible: false,
@@ -51,20 +59,23 @@ class _ScannerScreenState extends State<ScannerScreen> {
         forceReject: forceReject,
         onPassed: () {
           Navigator.pop(ctx);
-          _processImage(imagePath);
+          _processImage(imagePath, imageBytes: imageBytes);
         },
         onDismiss: () => Navigator.pop(ctx),
       ),
     );
   }
 
-  Future<void> _processImage(String imagePath) async {
+  Future<void> _processImage(String imagePath, {Uint8List? imageBytes}) async {
     setState(() {
       _isProcessing = true;
     });
 
     final provider = Provider.of<AppStateProvider>(context, listen: false);
-    final result = await provider.analyzeOnionImage(imagePath);
+    final result = await provider.analyzeOnionImage(
+      imagePath,
+      imageBytes: imageBytes,
+    );
 
     setState(() {
       _isProcessing = false;

@@ -1,11 +1,11 @@
 {
-    "name": "smart_onion_ai",
-    "short_name": "smart_onion_ai",
+    "name": "Smart Onion AI",
+    "short_name": "Smart Onion AI",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Onion quality scanning, mandi rates, and storage advice for farmers.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

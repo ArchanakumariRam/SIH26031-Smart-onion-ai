@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import '../models/onion_scan_result.dart';
 import '../models/mandi_rate.dart';
@@ -159,7 +160,10 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<OnionScanResult?> analyzeOnionImage(String imagePath) async {
+  Future<OnionScanResult?> analyzeOnionImage(
+    String imagePath, {
+    Uint8List? imageBytes,
+  }) async {
     _isScanning = true;
     notifyListeners();
 
@@ -167,6 +171,7 @@ class AppStateProvider extends ChangeNotifier {
       final result = await GeminiAiService().analyzeOnionImage(
         imagePath: imagePath,
         languageCode: _currentLanguage,
+        imageBytes: imageBytes,
       );
       _latestScanResult = result;
       _scanHistory.insert(0, result);

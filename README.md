@@ -45,6 +45,15 @@ The APKs are written to `build/app/outputs/flutter-apk/`.
 
 ## 📱 How to Run / Build
 
+### Deploy the web app
+
+The `main` branch is deployed automatically to GitHub Pages by the workflow in
+`.github/workflows/deploy-web.yml`. Enable **Settings → Pages → Build and
+deployment → Source: GitHub Actions** for the repository. After the workflow
+succeeds, the app is available at:
+
+https://ArchanakumariRam.github.io/SIH26031-Smart-onion-ai/
+
 ### 1. Test in Chrome / Web:
 ```bash
 flutter run -d chrome

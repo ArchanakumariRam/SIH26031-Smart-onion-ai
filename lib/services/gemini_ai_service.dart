@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import '../constants/app_constants.dart';
 import '../models/onion_scan_result.dart';
+import 'platform_image.dart';
 
 class GeminiAiService {
   static final GeminiAiService _instance = GeminiAiService._internal();
@@ -21,11 +22,12 @@ class GeminiAiService {
   Future<OnionScanResult> analyzeOnionImage({
     required String imagePath,
     required String languageCode,
+    Uint8List? imageBytes,
   }) async {
     // If API key is present, attempt live Gemini API call
     if (_apiKey.isNotEmpty) {
       try {
-        final bytes = await File(imagePath).readAsBytes();
+        final bytes = imageBytes ?? await readImageBytes(imagePath);
         final base64Image = base64Encode(bytes);
 
         final url = Uri.parse(

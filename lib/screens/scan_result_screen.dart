@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../models/onion_scan_result.dart';
 import '../models/onion_grade_plus_models.dart';
 import '../services/localization_service.dart';
+import '../services/platform_image.dart';
 import '../widgets/audio_speak_button.dart';
 import '../widgets/farmer_button.dart';
 import '../widgets/stat_card.dart';
@@ -148,12 +148,12 @@ Recommendation: ${result.actionAdvice}
                       width: 80,
                       height: 80,
                       color: AppColors.onionPurple.withValues(alpha: 0.1),
-                      child: (result.imagePath != null &&
-                              File(result.imagePath!).existsSync())
-                          ? Image.file(File(result.imagePath!), fit: BoxFit.cover)
-                          : const Center(
-                              child: Text("🧅", style: TextStyle(fontSize: 44)),
-                            ),
+                      child: imageOrPlaceholder(
+                        result.imagePath,
+                        placeholder: const Center(
+                          child: Text("🧅", style: TextStyle(fontSize: 44)),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 14),
