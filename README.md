@@ -54,6 +54,9 @@ succeeds, the app is available at:
 
 https://ArchanakumariRam.github.io/SIH26031-Smart-onion-ai/
 
+To publish again without changing app code, run **Deploy Flutter web app to
+GitHub Pages** from the repository's Actions tab.
+
 ### 1. Test in Chrome / Web:
 ```bash
 flutter run -d chrome
