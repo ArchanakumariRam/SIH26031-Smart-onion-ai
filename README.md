@@ -47,26 +47,17 @@ The APKs are written to `build/app/outputs/flutter-apk/`.
 
 ### Deploy the web app
 
-The `main` branch is deployed to Vercel by the
-`.github/workflows/deploy-vercel.yml` workflow.
+The `main` branch is built and deployed to GitHub Pages by the workflow in
+`.github/workflows/deploy-web.yml`.
 
-1. Install the [Vercel CLI](https://vercel.com/docs/cli) and sign in:
-   ```bash
-   npm install --global vercel
-   vercel login
-   ```
-2. From the project root, run `vercel link` and create or select the Vercel
-   project. This creates `.vercel/project.json`; copy its `orgId` and
-   `projectId` values.
-3. In Vercel, create a token under **Account Settings → Tokens**.
-4. In the GitHub repository, open **Settings → Secrets and variables →
-   Actions → New repository secret**. Add `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`,
-   and `VERCEL_TOKEN` using the values from the previous steps.
-5. Push to `main`, or run **Deploy Flutter web app to Vercel** from the
+1. Open the repository's **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Push to `main`, or run **Deploy Flutter web app to GitHub Pages** from the
    repository's Actions tab.
 
-The workflow builds Flutter for web and deploys the static output to Vercel.
-The production URL is shown in the successful workflow run.
+After the workflow succeeds, the app is available at:
+
+https://ArchanakumariRam.github.io/SIH26031-Smart-onion-ai/
 
 ### 1. Test in Chrome / Web:
 ```bash

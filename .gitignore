@@ -46,6 +46,3 @@ app.*.map.json
 
 # Generated Android packages
 *.apk
-
-# Vercel project configuration and build output
-.vercel
